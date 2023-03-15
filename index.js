@@ -316,7 +316,7 @@ window.addEventListener("mousemove", function(event) {
         fakeController.axes[3] = axisY;
     }
 
-    console.log(navigator.getGamepads()[0].axes)
+     simulateButtonPress(16);
     
 });
 
@@ -645,6 +645,8 @@ function AnalogUp(analog_position){
     fakeController.axes[x_index] = 0;
     fakeController.axes[y_index] = -1;
     
+     simulateButtonPress(16);
+    
 }
 
 function AnalogDown(analog_position){
@@ -659,6 +661,8 @@ function AnalogDown(analog_position){
 
     fakeController.axes[x_index] = 0;
     fakeController.axes[y_index] = 1;
+    
+     simulateButtonPress(16);
     
 }
 
@@ -675,6 +679,8 @@ function AnalogLeft(analog_position){
     fakeController.axes[x_index] = -1;
     fakeController.axes[y_index] = 0;
     
+     simulateButtonPress(16);
+    
 }
 
 function AnalogRight(analog_position){
@@ -689,6 +695,8 @@ function AnalogRight(analog_position){
 
     fakeController.axes[x_index] = 1;
     fakeController.axes[y_index] = 0;
+    
+     simulateButtonPress(16);
     
 }
 
@@ -705,6 +713,8 @@ function AnalogRightUp(analog_position){
     fakeController.axes[x_index] = 1;
     fakeController.axes[y_index] = -1;
     
+     simulateButtonPress(16);
+    
 }
 
 function AnalogRightDown(analog_position){
@@ -719,6 +729,8 @@ function AnalogRightDown(analog_position){
 
     fakeController.axes[x_index] = 1;
     fakeController.axes[y_index] = 1;
+    
+     simulateButtonPress(16);
     
 }
 
@@ -735,6 +747,8 @@ function AnalogLeftUp(analog_position){
     fakeController.axes[x_index] = -1;
     fakeController.axes[y_index] = -1;
     
+     simulateButtonPress(16);
+    
 }
 
 function AnalogLeftDown(analog_position){
@@ -750,6 +764,8 @@ function AnalogLeftDown(analog_position){
     fakeController.axes[x_index] = -1;
     fakeController.axes[y_index] = 1;
     
+     simulateButtonPress(16);
+    
 }
 
 function ResetAnalog(analog_position){
@@ -764,6 +780,8 @@ function ResetAnalog(analog_position){
 
     fakeController.axes[x_index] = 0;
     fakeController.axes[y_index] = 0;
+    
+    simulateButtonPress(16);
     
 }
   
