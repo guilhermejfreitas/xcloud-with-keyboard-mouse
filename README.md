@@ -27,4 +27,4 @@ w a s d Controla o Analógico esquerdo
 8 4 5 6 Controla o Analógico Direito
 
 Analógico pode ser usado com mouse setando a variável setMouseToAnalog como 1 ou 2
-Setando como 1 ele irá se comportar como analógico esquerdo, setando como 2 analógico esquerdo
+Setando como 1 ele irá se comportar como analógico esquerdo, setando como 2 analógico direito
