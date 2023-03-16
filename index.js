@@ -7,6 +7,12 @@
 let setMouseToAnalog = 0;
 
 /*
+    Define o nível de sensibilidade no mouse
+*/
+
+let sensibility = 0.6;
+
+/*
 
     Posição de cada botão Xbox no array de botões do Fake Controller
 
@@ -304,8 +310,8 @@ window.addEventListener("mousemove", function(event) {
     
     //Converte a posição x e y em axis do gamepad
     let maxDelta = Math.max(Math.abs(deltaX), Math.abs(deltaY));
-    let axisX = deltaX / maxDelta;
-    let axisY = deltaY / maxDelta;
+    let axisX = (deltaX / maxDelta) * sensibility;
+    let axisY = (deltaY / maxDelta) * sensibility;
 
     //Seta o axis a posição do analógico
     if (setMouseToAnalog == 1){
