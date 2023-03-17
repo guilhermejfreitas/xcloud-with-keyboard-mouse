@@ -1,10 +1,21 @@
 /*
+    Desabilitar ou habilitar o Controle Fake
+*/
+
+let fakeControllerActive = true;
+
+/*
+    Pega e Armazena os gamepads reais conectados, para caso desabilitar o fake controller conectar novamente os gamepads reais
+*/
+const real_gamepads = navigator.getGamepads();
+
+/*
     0 = Desabilitado
     1 = Define o mouse para funcionar como analógico esquerdo
     2 = Define o mouse para funcionar como analógico direito
 */
 
-let setMouseToAnalog = 0;
+let setMouseToAnalog = 2;
 
 /*
     Define o nível de sensibilidade no mouse
@@ -136,145 +147,149 @@ const fakeController = {
 
 //quando soltar a tecla
 window.addEventListener("keyup", (event) => {
-    keyboard_keycodes[event.keyCode].pressed = false;
+        
+    if (fakeControllerActive){
+        
+        keyboard_keycodes[event.keyCode].pressed = false;
 
-    switch(keyboard_keycodes[event.keyCode].controller_button){
-        case 'ANALOG_LEFT_RIGHT':
-            controller_buttons.ANALOG_LEFT_RIGHT.pressed = false;
-            if (controller_buttons.ANALOG_LEFT_UP.pressed){
-                AnalogUp();
-            }else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){
-                AnalogDown();
-            }else{
-                ResetAnalog();
-            }
-        break;
-        case 'ANALOG_LEFT_LEFT':
-            controller_buttons.ANALOG_LEFT_LEFT.pressed = false;
-            if (controller_buttons.ANALOG_LEFT_UP.pressed){
-                AnalogUp();
-            }else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){
-                AnalogDown();
-            }else{
-                ResetAnalog();
-            }
-        break;
-        case 'ANALOG_LEFT_UP':
-            controller_buttons.ANALOG_LEFT_UP.pressed = false;
-            if (controller_buttons.ANALOG_LEFT_LEFT.pressed){
-                AnalogLeft();
-            }else if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){
-                AnalogRight();
-            }else{
-                ResetAnalog();
-            }
-        break;
-        case 'ANALOG_LEFT_DOWN':
-            controller_buttons.ANALOG_LEFT_DOWN.pressed = false;
-            if (controller_buttons.ANALOG_LEFT_LEFT.pressed){
-                AnalogLeft();
-            }else if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){
-                AnalogRight();
-            }else{
-                ResetAnalog();
-            }
-        break;
-        case 'ANALOG_RIGHT_RIGHT':
-            controller_buttons.ANALOG_RIGHT_RIGHT.pressed = false;
-            if (controller_buttons.ANALOG_RIGHT_UP.pressed){
-                AnalogUp('right');
-            }else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){
-                AnalogDown('right');
-            }else{
-                ResetAnalog('right');
-            }
-        break;
-        case 'ANALOG_RIGHT_LEFT':
-            controller_buttons.ANALOG_RIGHT_LEFT.pressed = false;
-            if (controller_buttons.ANALOG_RIGHT_UP.pressed){
-                AnalogUp('right');
-            }else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){
-                AnalogDown('right');
-            }else{
-                ResetAnalog('right');
-            }
-        break;
-        case 'ANALOG_RIGHT_UP':
-            controller_buttons.ANALOG_RIGHT_UP.pressed = false;
-            if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){
-                AnalogLeft('right');
-            }else if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){
-                AnalogRight('right');
-            }else{
-                ResetAnalog('right');
-            }
-        break;
-        case 'ANALOG_RIGHT_DOWN':
-            controller_buttons.ANALOG_RIGHT_DOWN.pressed = false;
-            if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){
-                AnalogLeft('right');
-            }else if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){
-                AnalogRight('right');
-            }else{
-                ResetAnalog('right');
-            }
-        break;
-        case 'STICK_RIGHT':
-            controller_buttons.STICK_RIGHT.pressed = false;
-            simulateButtonUnpress(15)
-        break;
-        case 'STICK_LEFT':
-            controller_buttons.STICK_LEFT.pressed = false;
-            simulateButtonUnpress(14)
-        break;
-        case 'STICK_UP':
-            controller_buttons.STICK_UP.pressed = false;
-            simulateButtonUnpress(12)
-        break;
-        case 'STICK_DOWN':
-            controller_buttons.STICK_DOWN.pressed = false;
-            simulateButtonUnpress(13)
-        break;
-        case 'A':
-            controller_buttons.A.pressed = false;
-            simulateButtonUnpress(0)
-        break;
-        case 'B':
-            controller_buttons.B.pressed = false;
-            simulateButtonUnpress(1)
-        break;
-        case 'X':
-            controller_buttons.X.pressed = false;
-            simulateButtonUnpress(2)
-        break;
-        case 'Y':
-            controller_buttons.Y.pressed = false;
-            simulateButtonUnpress(3)
-        break;
-        case 'START':
-            controller_buttons.START.pressed = false;
-            simulateButtonUnpress(9)
-        break;
-        case 'SELECT':
-            controller_buttons.SELECT.pressed = false;
-            simulateButtonUnpress(8)
-        break;
-        case 'LT':
-            controller_buttons.LT.pressed = false;
-            simulateButtonUnpress(6)
-        break;
-        case 'LB':
-            controller_buttons.LB.pressed = false;
-            simulateButtonUnpress(4)
-        break;
-        case 'RT':
-            controller_buttons.RT.pressed = false;
-            simulateButtonUnpress(7)
-        break;
-        case 'RB':
-            controller_buttons.RB.pressed = false;
-            simulateButtonUnpress(5)
-        break;
+        switch(keyboard_keycodes[event.keyCode].controller_button){
+            case 'ANALOG_LEFT_RIGHT':
+                controller_buttons.ANALOG_LEFT_RIGHT.pressed = false;
+                if (controller_buttons.ANALOG_LEFT_UP.pressed){
+                    AnalogUp();
+                }else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){
+                    AnalogDown();
+                }else{
+                    ResetAnalog();
+                }
+            break;
+            case 'ANALOG_LEFT_LEFT':
+                controller_buttons.ANALOG_LEFT_LEFT.pressed = false;
+                if (controller_buttons.ANALOG_LEFT_UP.pressed){
+                    AnalogUp();
+                }else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){
+                    AnalogDown();
+                }else{
+                    ResetAnalog();
+                }
+            break;
+            case 'ANALOG_LEFT_UP':
+                controller_buttons.ANALOG_LEFT_UP.pressed = false;
+                if (controller_buttons.ANALOG_LEFT_LEFT.pressed){
+                    AnalogLeft();
+                }else if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){
+                    AnalogRight();
+                }else{
+                    ResetAnalog();
+                }
+            break;
+            case 'ANALOG_LEFT_DOWN':
+                controller_buttons.ANALOG_LEFT_DOWN.pressed = false;
+                if (controller_buttons.ANALOG_LEFT_LEFT.pressed){
+                    AnalogLeft();
+                }else if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){
+                    AnalogRight();
+                }else{
+                    ResetAnalog();
+                }
+            break;
+            case 'ANALOG_RIGHT_RIGHT':
+                controller_buttons.ANALOG_RIGHT_RIGHT.pressed = false;
+                if (controller_buttons.ANALOG_RIGHT_UP.pressed){
+                    AnalogUp('right');
+                }else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){
+                    AnalogDown('right');
+                }else{
+                    ResetAnalog('right');
+                }
+            break;
+            case 'ANALOG_RIGHT_LEFT':
+                controller_buttons.ANALOG_RIGHT_LEFT.pressed = false;
+                if (controller_buttons.ANALOG_RIGHT_UP.pressed){
+                    AnalogUp('right');
+                }else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){
+                    AnalogDown('right');
+                }else{
+                    ResetAnalog('right');
+                }
+            break;
+            case 'ANALOG_RIGHT_UP':
+                controller_buttons.ANALOG_RIGHT_UP.pressed = false;
+                if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){
+                    AnalogLeft('right');
+                }else if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){
+                    AnalogRight('right');
+                }else{
+                    ResetAnalog('right');
+                }
+            break;
+            case 'ANALOG_RIGHT_DOWN':
+                controller_buttons.ANALOG_RIGHT_DOWN.pressed = false;
+                if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){
+                    AnalogLeft('right');
+                }else if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){
+                    AnalogRight('right');
+                }else{
+                    ResetAnalog('right');
+                }
+            break;
+            case 'STICK_RIGHT':
+                controller_buttons.STICK_RIGHT.pressed = false;
+                simulateButtonUnpress(15)
+            break;
+            case 'STICK_LEFT':
+                controller_buttons.STICK_LEFT.pressed = false;
+                simulateButtonUnpress(14)
+            break;
+            case 'STICK_UP':
+                controller_buttons.STICK_UP.pressed = false;
+                simulateButtonUnpress(12)
+            break;
+            case 'STICK_DOWN':
+                controller_buttons.STICK_DOWN.pressed = false;
+                simulateButtonUnpress(13)
+            break;
+            case 'A':
+                controller_buttons.A.pressed = false;
+                simulateButtonUnpress(0)
+            break;
+            case 'B':
+                controller_buttons.B.pressed = false;
+                simulateButtonUnpress(1)
+            break;
+            case 'X':
+                controller_buttons.X.pressed = false;
+                simulateButtonUnpress(2)
+            break;
+            case 'Y':
+                controller_buttons.Y.pressed = false;
+                simulateButtonUnpress(3)
+            break;
+            case 'START':
+                controller_buttons.START.pressed = false;
+                simulateButtonUnpress(9)
+            break;
+            case 'SELECT':
+                controller_buttons.SELECT.pressed = false;
+                simulateButtonUnpress(8)
+            break;
+            case 'LT':
+                controller_buttons.LT.pressed = false;
+                simulateButtonUnpress(6)
+            break;
+            case 'LB':
+                controller_buttons.LB.pressed = false;
+                simulateButtonUnpress(4)
+            break;
+            case 'RT':
+                controller_buttons.RT.pressed = false;
+                simulateButtonUnpress(7)
+            break;
+            case 'RB':
+                controller_buttons.RB.pressed = false;
+                simulateButtonUnpress(5)
+            break;
+        }
     }
 });
 
@@ -285,185 +300,191 @@ window.addEventListener("keyup", (event) => {
 let timeout;
   
 window.addEventListener("mousemove", function(event) {
+    
+     if (fakeControllerActive){
+         
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){ //RESETA A POSIÇÃO DO AXIS PARA 0
 
-    clearTimeout(timeout);
-    timeout = setTimeout(function(){ //RESETA A POSIÇÃO DO AXIS PARA 0
+            if (setMouseToAnalog == 1){
+                fakeController.axes[0] = 0;
+                fakeController.axes[1] = 0;
+            }else if (setMouseToAnalog == 2){
+                fakeController.axes[2] = 0;
+                fakeController.axes[3] = 0;
+            }
 
+        }, 50);
+
+        let mouseX = event.clientX;
+        let mouseY = event.clientY;
+
+        //Calcula a posição x e y em relação ao centro da janela
+        let windowCenterX = window.innerWidth / 2;
+        let windowCenterY = window.innerHeight / 2;
+        let deltaX = mouseX - windowCenterX;
+        let deltaY = mouseY - windowCenterY;
+
+        //Converte a posição x e y em axis do gamepad
+        let maxDelta = Math.max(Math.abs(deltaX), Math.abs(deltaY));
+        let axisX = (deltaX / maxDelta) * sensibility;
+        let axisY = (deltaY / maxDelta) * sensibility;
+
+        //Seta o axis a posição do analógico
         if (setMouseToAnalog == 1){
-            fakeController.axes[0] = 0;
-            fakeController.axes[1] = 0;
+            fakeController.axes[0] = axisX;
+            fakeController.axes[1] = axisY;
         }else if (setMouseToAnalog == 2){
-            fakeController.axes[2] = 0;
-            fakeController.axes[3] = 0;
+            fakeController.axes[2] = axisX;
+            fakeController.axes[3] = axisY;
         }
-        
-    }, 50);
 
-    let mouseX = event.clientX;
-    let mouseY = event.clientY;
-    
-    //Calcula a posição x e y em relação ao centro da janela
-    let windowCenterX = window.innerWidth / 2;
-    let windowCenterY = window.innerHeight / 2;
-    let deltaX = mouseX - windowCenterX;
-    let deltaY = mouseY - windowCenterY;
-    
-    //Converte a posição x e y em axis do gamepad
-    let maxDelta = Math.max(Math.abs(deltaX), Math.abs(deltaY));
-    let axisX = (deltaX / maxDelta) * sensibility;
-    let axisY = (deltaY / maxDelta) * sensibility;
-
-    //Seta o axis a posição do analógico
-    if (setMouseToAnalog == 1){
-        fakeController.axes[0] = axisX;
-        fakeController.axes[1] = axisY;
-    }else if (setMouseToAnalog == 2){
-        fakeController.axes[2] = axisX;
-        fakeController.axes[3] = axisY;
-    }
-
-     simulateButtonPress(16);
+         simulateButtonPress(16);
+     }
     
 });
 
 //quando pressionar a tecla
 window.addEventListener("keydown", (event) => {
-    keyboard_keycodes[event.keyCode].pressed = true;
+    
+     if (fakeControllerActive){
 
-    switch(keyboard_keycodes[event.keyCode].controller_button){
+        keyboard_keycodes[event.keyCode].pressed = true;
 
-        case 'ANALOG_LEFT_RIGHT':
-            resetAnalogFromOppositePosition('ANALOG_LEFT_RIGHT');
-            controller_buttons.ANALOG_LEFT_RIGHT.pressed = true;
-            console.log(controller_buttons.ANALOG_LEFT_UP.pressed)
-            if (controller_buttons.ANALOG_LEFT_UP.pressed){ AnalogRightUp(); }
-            else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){ AnalogRightDown(); }
-            else{
-                AnalogRight();
-            }
-        break;
-        case 'ANALOG_LEFT_LEFT':
-            resetAnalogFromOppositePosition('ANALOG_LEFT_LEFT');
-            controller_buttons.ANALOG_LEFT_LEFT.pressed = true;
-            if (controller_buttons.ANALOG_LEFT_UP.pressed){ AnalogLeftUp() }
-            else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){ AnalogLeftDown(); }
-            else{
-                AnalogLeft();
-            }
-        break;
-        case 'ANALOG_LEFT_UP':
-            resetAnalogFromOppositePosition('ANALOG_LEFT_UP');
-            controller_buttons.ANALOG_LEFT_UP.pressed = true;
-            if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){ AnalogRightUp() }
-            else if (controller_buttons.ANALOG_LEFT_LEFT.pressed){ AnalogLeftUp() }
-            else{
-                AnalogUp();
-            }
-        break;
-        case 'ANALOG_LEFT_DOWN':
-            resetAnalogFromOppositePosition('ANALOG_LEFT_DOWN');
-            controller_buttons.ANALOG_LEFT_DOWN.pressed = true;
-            if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){ AnalogRightDown(); }
-            else if (controller_buttons.ANALOG_LEFT_LEFT.pressed){ AnalogLeftDown(); }
-            else{
-                AnalogDown();
-            }
-        break;
-        case 'ANALOG_RIGHT_RIGHT':
-            resetAnalogFromOppositePosition('ANALOG_RIGHT_RIGHT');
-            controller_buttons.ANALOG_RIGHT_RIGHT.pressed = true;
-            console.log(controller_buttons.ANALOG_RIGHT_UP.pressed)
-            if (controller_buttons.ANALOG_RIGHT_UP.pressed){ AnalogRightUp('right') }
-            else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){ AnalogRightDown('right') }
-            else{
-                AnalogRight('right')
-            }
-        break;
-        case 'ANALOG_RIGHT_LEFT':
-            resetAnalogFromOppositePosition('ANALOG_RIGHT_LEFT');
-            controller_buttons.ANALOG_RIGHT_LEFT.pressed = true;
-            if (controller_buttons.ANALOG_RIGHT_UP.pressed){ AnalogLeftUp('right') }
-            else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){ AnalogLeftDown('right') }
-            else{
-                AnalogLeft('right')
-            }
-        break;
-        case 'ANALOG_RIGHT_UP':
-            resetAnalogFromOppositePosition('ANALOG_RIGHT_UP');
-            controller_buttons.ANALOG_RIGHT_UP.pressed = true;
-            if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){ AnalogRightUp('right') }
-            else if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){ AnalogLeftUp('right') }
-            else{
-                AnalogUp('right')
-            }
-        break;
-        case 'ANALOG_RIGHT_DOWN':
-            resetAnalogFromOppositePosition('ANALOG_RIGHT_DOWN');
-            controller_buttons.ANALOG_RIGHT_DOWN.pressed = true;
-            if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){ AnalogRightDown('right') }
-            else if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){ AnalogLeftDown('right') }
-            else{
-                AnalogDown('right')
-            }
-        break;
-        case 'STICK_RIGHT':
-            controller_buttons.STICK_RIGHT.pressed = true;
-            simulateButtonPress(15)
-        break;
-        case 'STICK_LEFT':
-            controller_buttons.STICK_LEFT.pressed = true;
-            simulateButtonPress(14)
-        break;
-        case 'STICK_UP':
-            controller_buttons.STICK_UP.pressed = true;
-            simulateButtonPress(12)
-        break;
-        case 'STICK_DOWN':
-            controller_buttons.STICK_DOWN.pressed = true;
-            simulateButtonPress(13)
-        break;
-        case 'A':
-            controller_buttons.A.pressed = true;
-            simulateButtonPress(0)
-        break;
-        case 'B':
-            controller_buttons.B.pressed = true;
-            simulateButtonPress(1)
-        break;
-        case 'X':
-            controller_buttons.X.pressed = true;
-            simulateButtonPress(2)
-        break;
-        case 'Y':
-            controller_buttons.Y.pressed = true;
-            simulateButtonPress(3)
-        break;
-        case 'START':
-            controller_buttons.START.pressed = true;
-            simulateButtonPress(9)
-        break;
-        case 'SELECT':
-            controller_buttons.SELECT.pressed = true;
-            simulateButtonPress(8)
-        break;
-        case 'LT':
-            controller_buttons.LT.pressed = true;
-            simulateButtonPress(6)
-        break;
-        case 'LB':
-            controller_buttons.LB.pressed = true;
-            simulateButtonPress(4)
-        break;
-        case 'RT':
-            controller_buttons.RT.pressed = true;
-            simulateButtonPress(7)
-        break;
-        case 'RB':
-            controller_buttons.RB.pressed = true;
-            simulateButtonPress(5)
-        break;
+        switch(keyboard_keycodes[event.keyCode].controller_button){
+
+            case 'ANALOG_LEFT_RIGHT':
+                resetAnalogFromOppositePosition('ANALOG_LEFT_RIGHT');
+                controller_buttons.ANALOG_LEFT_RIGHT.pressed = true;
+                console.log(controller_buttons.ANALOG_LEFT_UP.pressed)
+                if (controller_buttons.ANALOG_LEFT_UP.pressed){ AnalogRightUp(); }
+                else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){ AnalogRightDown(); }
+                else{
+                    AnalogRight();
+                }
+            break;
+            case 'ANALOG_LEFT_LEFT':
+                resetAnalogFromOppositePosition('ANALOG_LEFT_LEFT');
+                controller_buttons.ANALOG_LEFT_LEFT.pressed = true;
+                if (controller_buttons.ANALOG_LEFT_UP.pressed){ AnalogLeftUp() }
+                else if (controller_buttons.ANALOG_LEFT_DOWN.pressed){ AnalogLeftDown(); }
+                else{
+                    AnalogLeft();
+                }
+            break;
+            case 'ANALOG_LEFT_UP':
+                resetAnalogFromOppositePosition('ANALOG_LEFT_UP');
+                controller_buttons.ANALOG_LEFT_UP.pressed = true;
+                if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){ AnalogRightUp() }
+                else if (controller_buttons.ANALOG_LEFT_LEFT.pressed){ AnalogLeftUp() }
+                else{
+                    AnalogUp();
+                }
+            break;
+            case 'ANALOG_LEFT_DOWN':
+                resetAnalogFromOppositePosition('ANALOG_LEFT_DOWN');
+                controller_buttons.ANALOG_LEFT_DOWN.pressed = true;
+                if (controller_buttons.ANALOG_LEFT_RIGHT.pressed){ AnalogRightDown(); }
+                else if (controller_buttons.ANALOG_LEFT_LEFT.pressed){ AnalogLeftDown(); }
+                else{
+                    AnalogDown();
+                }
+            break;
+            case 'ANALOG_RIGHT_RIGHT':
+                resetAnalogFromOppositePosition('ANALOG_RIGHT_RIGHT');
+                controller_buttons.ANALOG_RIGHT_RIGHT.pressed = true;
+                console.log(controller_buttons.ANALOG_RIGHT_UP.pressed)
+                if (controller_buttons.ANALOG_RIGHT_UP.pressed){ AnalogRightUp('right') }
+                else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){ AnalogRightDown('right') }
+                else{
+                    AnalogRight('right')
+                }
+            break;
+            case 'ANALOG_RIGHT_LEFT':
+                resetAnalogFromOppositePosition('ANALOG_RIGHT_LEFT');
+                controller_buttons.ANALOG_RIGHT_LEFT.pressed = true;
+                if (controller_buttons.ANALOG_RIGHT_UP.pressed){ AnalogLeftUp('right') }
+                else if (controller_buttons.ANALOG_RIGHT_DOWN.pressed){ AnalogLeftDown('right') }
+                else{
+                    AnalogLeft('right')
+                }
+            break;
+            case 'ANALOG_RIGHT_UP':
+                resetAnalogFromOppositePosition('ANALOG_RIGHT_UP');
+                controller_buttons.ANALOG_RIGHT_UP.pressed = true;
+                if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){ AnalogRightUp('right') }
+                else if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){ AnalogLeftUp('right') }
+                else{
+                    AnalogUp('right')
+                }
+            break;
+            case 'ANALOG_RIGHT_DOWN':
+                resetAnalogFromOppositePosition('ANALOG_RIGHT_DOWN');
+                controller_buttons.ANALOG_RIGHT_DOWN.pressed = true;
+                if (controller_buttons.ANALOG_RIGHT_RIGHT.pressed){ AnalogRightDown('right') }
+                else if (controller_buttons.ANALOG_RIGHT_LEFT.pressed){ AnalogLeftDown('right') }
+                else{
+                    AnalogDown('right')
+                }
+            break;
+            case 'STICK_RIGHT':
+                controller_buttons.STICK_RIGHT.pressed = true;
+                simulateButtonPress(15)
+            break;
+            case 'STICK_LEFT':
+                controller_buttons.STICK_LEFT.pressed = true;
+                simulateButtonPress(14)
+            break;
+            case 'STICK_UP':
+                controller_buttons.STICK_UP.pressed = true;
+                simulateButtonPress(12)
+            break;
+            case 'STICK_DOWN':
+                controller_buttons.STICK_DOWN.pressed = true;
+                simulateButtonPress(13)
+            break;
+            case 'A':
+                controller_buttons.A.pressed = true;
+                simulateButtonPress(0)
+            break;
+            case 'B':
+                controller_buttons.B.pressed = true;
+                simulateButtonPress(1)
+            break;
+            case 'X':
+                controller_buttons.X.pressed = true;
+                simulateButtonPress(2)
+            break;
+            case 'Y':
+                controller_buttons.Y.pressed = true;
+                simulateButtonPress(3)
+            break;
+            case 'START':
+                controller_buttons.START.pressed = true;
+                simulateButtonPress(9)
+            break;
+            case 'SELECT':
+                controller_buttons.SELECT.pressed = true;
+                simulateButtonPress(8)
+            break;
+            case 'LT':
+                controller_buttons.LT.pressed = true;
+                simulateButtonPress(6)
+            break;
+            case 'LB':
+                controller_buttons.LB.pressed = true;
+                simulateButtonPress(4)
+            break;
+            case 'RT':
+                controller_buttons.RT.pressed = true;
+                simulateButtonPress(7)
+            break;
+            case 'RB':
+                controller_buttons.RB.pressed = true;
+                simulateButtonPress(5)
+            break;
+        }
     }
-  
 
 });
 
@@ -790,12 +811,17 @@ function ResetAnalog(analog_position){
     simulateButtonPress(16);
     
 }
-  
-const event = new Event('gamepadconnected');
-fakeController.connected = true;
-fakeController.timestamp = performance.now();
-event.gamepad = fakeController;
-navigator.getGamepads = function getGamepads() {
-    return [{ ...fakeController }]
-};
-window.dispatchEvent(event);
+
+function connectGamepad(){
+    const event = new Event('gamepadconnected');
+    fakeController.connected = true;
+    fakeController.timestamp = performance.now();
+    event.gamepad = fakeController;
+    navigator.getGamepads = function getGamepads() {
+        const controller = fakeControllerActive ? [{ ...fakeController }] : real_gamepads;
+        return controller;
+    };
+    window.dispatchEvent(event);
+}
+
+connectGamepad();
