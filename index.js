@@ -1,3 +1,26 @@
+function mapMouseToAxis(mouseX, mouseY, screenWidth, screenHeight) {
+            // Calcula a posição relativa do mouse em relação ao centro da tela
+            const centerX = screenWidth / 2;
+            const centerY = screenHeight / 2;
+            const deltaX = mouseX - centerX;
+            const deltaY = mouseY - centerY;
+
+            // Calcula a distância do mouse em relação ao centro da tela
+            const distanceToCenter = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+
+            // Define um limite para a distância máxima do mouse ao centro
+            const maxDistance = Math.min(centerX, centerY);
+
+            // Calcula a intensidade normalizada do movimento com base na distância do mouse à borda da tela
+            const intensity = Math.min(distanceToCenter / maxDistance, 1.0);
+
+            // Mapeia a posição do mouse para os valores de Axis do joystick
+            const axisX = (deltaX / maxDistance) * intensity;
+            const axisY = (deltaY / maxDistance) * intensity;
+
+            return { axisX, axisY };
+        }
+
 /*
     Desabilitar ou habilitar o Controle Fake
 */
@@ -301,34 +324,12 @@ let timeout;
   
 window.addEventListener("mousemove", function(event) {
     
-     if (fakeControllerActive){
-         
-        clearTimeout(timeout);
-        timeout = setTimeout(function(){ //RESETA A POSIÇÃO DO AXIS PARA 0
+           const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
 
-            if (setMouseToAnalog == 1){
-                fakeController.axes[0] = 0;
-                fakeController.axes[1] = 0;
-            }else if (setMouseToAnalog == 2){
-                fakeController.axes[2] = 0;
-                fakeController.axes[3] = 0;
-            }
-
-        }, 50);
-
-        let mouseX = event.clientX;
-        let mouseY = event.clientY;
-
-        //Calcula a posição x e y em relação ao centro da janela
-        let windowCenterX = window.innerWidth / 2;
-        let windowCenterY = window.innerHeight / 2;
-        let deltaX = mouseX - windowCenterX;
-        let deltaY = mouseY - windowCenterY;
-
-        //Converte a posição x e y em axis do gamepad
-        let maxDelta = Math.max(Math.abs(deltaX), Math.abs(deltaY));
-        let axisX = (deltaX / maxDelta) * sensibility;
-        let axisY = (deltaY / maxDelta) * sensibility;
+            const { axisX, axisY } = mapMouseToAxis(mouseX, mouseY, screenWidth, screenHeight);
 
         //Seta o axis a posição do analógico
         if (setMouseToAnalog == 1){
@@ -340,7 +341,7 @@ window.addEventListener("mousemove", function(event) {
         }
 
          simulateButtonPress(16);
-     }
+     
     
 });
 
