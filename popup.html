@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>XPAD | Play xCloud using keyboard and mouse.</title>
+        <link rel="stylesheet" href="css/popup.css">
+    </head>
+    <body>
+
+        <h1>XPAD</h1>
+
+        <div>
+            <input type="checkbox" id="active">
+            <label for="active" id="active_value"></label>
+        </div>
+
+        <br/>
+
+        <div>
+            <label for="profiles">Selecione um perfil:</label>
+            <select id="profiles">
+                <option value="Default" selected="selected">Default</option>
+            </select>
+        </div>
+
+        <br/>
+
+        <!-- <div>
+            <input type="text" placeholder="Nome do novo perfil">
+            <button>Criar</button>
+            <br/>
+            <br/>
+            <span>Este perfil já existe</span>
+        </div> -->
+
+        <br/>
+
+        <div class="scrollable-div">
+
+            <h2>Botões</h2>
+
+            <div id="set-buttons">
+                <table>
+                    <tr>
+                        <td>Botão A</td>
+                        <td><button class="set-button" id="a_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Botão B</td>
+                        <td><button class="set-button" id="b_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Botão X</td>
+                        <td><button class="set-button" id="x_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Botão Y</td>
+                        <td><button class="set-button" id="y_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>LB</td>
+                        <td><button class="set-button" id="lb_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>RB</td>
+                        <td><button class="set-button" id="rb_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>LT</td>
+                        <td><button class="set-button" id="lt_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>RT</td>
+                        <td><button class="set-button" id="rt_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Back/View</td>
+                        <td><button class="set-button" id="bv_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Start/Menu</td>
+                        <td><button class="set-button" id="sm_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Seta Cima</td>
+                        <td><button class="set-button" id="dpad_up_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Seta Baixo</td>
+                        <td><button class="set-button" id="dpad_down_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Seta Esquerda</td>
+                        <td><button class="set-button" id="dpad_left_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Seta Direita</td>
+                        <td><button class="set-button" id="dpad_right_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Botão Analógico Esquerdo</td>
+                        <td><button class="set-button" id="l_analog_stick_button">Selecionar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Botão Analógico Direito</td>
+                        <td><button class="set-button" id="r_analog_stick_button">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Esquerdo Cima</td>
+                        <td><button class="set-button" id="l_analog_stick_up">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Esquerdo Baixo</td>
+                        <td><button class="set-button" id="l_analog_stick_down">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Esquerdo Esquerda</td>
+                        <td><button class="set-button" id="l_analog_stick_left">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Esquerdo Direita</td>
+                        <td><button class="set-button" id="l_analog_stick_right">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Direito Cima</td>
+                        <td><button class="set-button" id="r_analog_stick_up">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Direito Baixo</td>
+                        <td><button class="set-button" id="r_analog_stick_down">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Direito Esquerda</td>
+                        <td><button class="set-button" id="r_analog_stick_left">Selecionar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Analógico Direito Direita</td>
+                        <td><button class="set-button" id="r_analog_stick_right">Selecionar</button></td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2>Sensibilidade</h2>
+
+            <div>
+                <input type="range" id="sensitivity" min="1" max="10" step="1" value="5">
+                <label for="sensitivity_value">Sensibilidade: 
+                    <span id="sensitivity_value">5</span>
+                </label>
+            </div>
+
+            <h2>Usar Mouse como Analógico</h2>
+
+            <input type="radio" id="mouse_to_analog_stick_left" name="mouse_to_analog_stick" value="30">
+            <label for="mouse_to_analog_stick_left">Usar Mouse como analógico esquerdo</label>
+            <br>
+
+            <input type="radio" id="mouse_to_analog_stick_right" name="mouse_to_analog_stick" value="60">
+            <label for="mouse_to_analog_stick_right">Usar Mouse como analógico direito</label>
+            <br>  
+
+            <input type="radio" id="mouse_to_analog_stick_none" name="mouse_to_analog_stick" value="100">
+            <label for="mouse_to_analog_stick_none">Não usar mouse como analógico</label>
+            <br>  
+
+        </div>
+
+        <br/>
+
+        <table>
+            <tr>
+                <td><a href="">Testar XPAD</a></td>
+                <td><a href="">Ir para o xCloud</a></td>
+            </tr>
+        </table>
+
+        <script src="scripts/popup.js"></script>
+
+    </body>
+</html>

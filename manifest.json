@@ -1,0 +1,28 @@
+{
+	"action": {
+		"default_popup": "popup.html",
+		"default_title": "Play xCloud using keyboard and mouse."
+	},
+	"author": "Guilherme Freitas",
+	"manifest_version": 3,
+	"name": "Play xCloud using keyboard and mouse.",
+	"description": "Play Xbox Cloud Gaming (xCloud) using keyboard and mouse.",
+	"permissions": [ "storage", "tabs" ],
+	"short_name": "XPAD",
+	"version": "0.1",
+   	"content_scripts": [
+		{
+			"matches": ["https://www.xbox.com/*","https://www.google.com/*"],
+			"js": ["scripts/injector.js", "scripts/loader.js"]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"matches": ["https://www.xbox.com/*","https://www.google.com/*"],
+			"resources": [ "scripts/inject.js"]
+		}
+	],
+	"background": {
+		"service_worker": "scripts/background.js"
+	}
+}

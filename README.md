@@ -1,30 +1,61 @@
-# XCloud com Teclado e Mouse
-## v0.1.
+# 🎮 XPAD: Xbox Controller Emulator for XCLOUD 🎮  
 
-1 - Para testar Copie o Código Javascript.
-2 - Vá para o xcloud, entre no game que Deseja (Funciona em todos os games).
-3 - Vai aperarecer uma Janela de "Controle não conectado", logo em seguida clique em "Continuar mesmo assim".
-4 - Aperte F12 e Cole o Código Javascript.
-5 - Divirta-se.
+XPAD é uma extensão de navegador que emula um controle de Xbox, permitindo que você jogue no **XCLOUD** com teclado e mouse! Personalize os controles, teste e jogue diretamente na plataforma de streaming de games da Microsoft.  
 
-Os botões podem ser alterados via código, mas por default estão configurados como:
+---
 
-A - Enter
-B - Backspace
-X - Shift
-Y - Ctrl
+## 🖼️ Interface  
 
-LT - j
-RT - k
-RB - i
-LB - u
+Aqui está uma prévia da interface da extensão:  
 
-Setas do controle = Setas do teclado
+![XPAD Interface](./images/preview.png)  
 
-Os analógicos também funcionam com botões do teclado
-w a s d Controla o Analógico esquerdo
+---
 
-8 4 5 6 Controla o Analógico Direito
+## 🚀 Funcionalidades  
 
-Analógico pode ser usado com mouse setando a variável setMouseToAnalog como 1 ou 2
-Setando como 1 ele irá se comportar como analógico esquerdo, setando como 2 analógico direito
+- 🕹️ Emulação completa do controle de Xbox.  
+- 🖱️ Personalização de teclas e cliques do mouse para os botões do controle.  
+- 🌐 Funciona diretamente no navegador, sem configurações complicadas.  
+- ✅ Teste os mapeamentos antes de entrar no XCLOUD.  
+
+---
+
+## 🛠️ Como Usar  
+
+### Instalação  
+
+1. Faça o download deste repositório.  
+2. Abra o navegador e vá para as **Extensões** (chrome://extensions no Chrome).  
+3. Ative o **Modo Desenvolvedor**.  
+4. Clique em **Carregar sem compactação** e selecione a pasta do projeto.  
+5. Pronto! A extensão estará instalada.  
+
+---
+
+### Configuração  
+
+1. Abra a extensão XPAD no navegador.  
+2. Configure os botões de acordo com sua preferência.  
+3. Teste os mapeamentos usando o botão **Testar XPAD**.  
+4. Clique em **Ir para o xCloud** para começar a jogar!  
+
+---
+
+## 🔧 Contribuindo  
+
+Quer contribuir? Fique à vontade!  
+
+1. Faça um **fork** deste repositório.  
+2. Crie uma nova branch (`git checkout -b feature/minha-feature`).  
+3. Envie suas alterações (`git commit -am 'Adicionei minha feature'`).  
+4. Suba sua branch (`git push origin feature/minha-feature`).  
+5. Abra um **Pull Request**.  
+
+---
+
+## 📑 Licença  
+
+Este projeto é licenciado sob a **MIT License**.  
+
+---

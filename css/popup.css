@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    width: 450px;
+    height: 500px;
+    color: black;
+    padding: 10px;
+}
+
+h1 {
+    margin: 10px 0;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.scrollable-div {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    width: 50%;
+}
